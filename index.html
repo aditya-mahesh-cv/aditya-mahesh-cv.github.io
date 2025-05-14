@@ -1,41 +1,747 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Your Name - Portfolio</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #4169e1;
+            --secondary-color: #e6f0ff;
+            --text-color: #333;
+            --light-text: #777;
+            --bg-color: #fff;
+            --section-bg: #f8f9fa;
+            --border-color: #ddd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 50px 0;
+            text-align: center;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .profile-title {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        
+        /* Navigation Styles */
+        nav {
+            padding: 15px 0;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links li a {
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links li a:hover {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--section-bg);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-bio {
+            text-align: justify;
+            line-height: 1.8;
+        }
+        
+        /* Research Section */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .research-item {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .research-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .research-content {
+            padding: 20px;
+        }
+        
+        .research-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .research-description {
+            color: var(--text-color);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .research-meta {
+            font-size: 0.85rem;
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+        
+        .research-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .research-links a {
+            padding: 5px 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: background-color 0.3s;
+        }
+        
+        .research-links a:hover {
+            background-color: #3251a8;
+            text-decoration: none;
+        }
+        
+        /* Publications Section */
+        .publications-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .publication-item {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        
+        .publication-item:last-child {
+            border-bottom: none;
+        }
+        
+        .publication-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .publication-authors {
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        
+        .publication-venue {
+            color: var(--light-text);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .publication-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .publication-links a {
+            padding: 5px 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: background-color 0.3s;
+        }
+        
+        .publication-links a:hover {
+            background-color: #3251a8;
+            text-decoration: none;
+        }
+        
+        /* Experience Section */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--primary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--bg-color);
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .timeline-title {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-location {
+            font-style: italic;
+            color: var(--light-text);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        /* Education Section */
+        .education-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .education-item {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        
+        .education-item:last-child {
+            border-bottom: none;
+        }
+        
+        .degree {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .university {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .education-date {
+            color: var(--light-text);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact-method {
+            margin-bottom: 20px;
+        }
+        
+        .contact-method i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            font-size: 1.1rem;
+        }
+        
+        /* Footer Styles */
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            background-color: var(--section-bg);
+        }
+        
+        .copyright {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+                right: auto;
+            }
+            
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Your Name</h1>
-        <p>Your Title or Tagline</p>
+    <!-- Header Section -->
+    <header id="home">
+        <div class="container">
+            <div class="profile-container">
+                <img src="/api/placeholder/400/400" alt="Profile Picture" class="profile-img">
+                <h1 class="profile-name">Your Name</h1>
+                <p class="profile-title">Ph.D. Candidate in Computer Science</p>
+                <p>University Department • Research Lab</p>
+                <div class="social-links">
+                    <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-google"></i></a>
+                    <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
     </header>
-    
-    <main>
-        <section>
-            <h2>About Me</h2>
-            <p>Write a brief introduction about yourself here.</p>
-        </section>
-        
-        <section>
-            <h2>Projects</h2>
-            <p>List your projects here with links to their repositories.</p>
-        </section>
-        
-        <section>
-            <h2>Skills</h2>
-            <p>List your skills here.</p>
-        </section>
-        
-        <section>
-            <h2>Contact</h2>
-            <p>Share your contact information here.</p>
-        </section>
-    </main>
-    
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p class="about-bio">
+                    I am a Ph.D. Candidate in Computer Science specializing in [your specific research area]. My research focuses on developing novel approaches to [describe your research focus]. I am particularly interested in [describe specific interests within your field].
+                </p>
+                <p class="about-bio">
+                    Currently, I work at [Research Lab/University] under the supervision of [Advisor Name], where I investigate [specific research problems]. My work aims to [describe the impact or goal of your research].
+                </p>
+                <p class="about-bio">
+                    Prior to my doctoral studies, I received my [Previous Degree] from [University Name], where I worked on [previous work or thesis]. I have also collaborated with [mention any notable collaborations or industry experience].
+                </p>
+                <p class="about-bio">
+                    Outside of my research, I enjoy [mention hobbies or other interests]. I am always open to collaborations and discussions related to [your field or interests].
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research">
+        <div class="container">
+            <h2 class="section-title">Research</h2>
+            <div class="research-grid">
+                <!-- Research Item 1 -->
+                <div class="research-item">
+                    <div class="research-content">
+                        <h3 class="research-title">Machine Learning for Natural Language Processing</h3>
+                        <p class="research-description">
+                            Investigating the application of deep learning techniques to improve natural language understanding and generation.
+                        </p>
+                        <div class="research-meta">
+                            <span>Keywords: Deep Learning, NLP, Transformers</span>
+                        </div>
+                        <div class="research-links">
+                            <a href="#" target="_blank">Paper</a>
+                            <a href="#" target="_blank">Code</a>
+                            <a href="#" target="_blank">Demo</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Research Item 2 -->
+                <div class="research-item">
+                    <div class="research-content">
+                        <h3 class="research-title">Computer Vision Applications</h3>
+                        <p class="research-description">
+                            Developing novel computer vision algorithms for image recognition and scene understanding with applications in autonomous systems.
+                        </p>
+                        <div class="research-meta">
+                            <span>Keywords: Computer Vision, CNN, Object Detection</span>
+                        </div>
+                        <div class="research-links">
+                            <a href="#" target="_blank">Paper</a>
+                            <a href="#" target="_blank">Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Research Item 3 -->
+                <div class="research-item">
+                    <div class="research-content">
+                        <h3 class="research-title">AI Ethics and Bias Mitigation</h3>
+                        <p class="research-description">
+                            Researching methods to identify and mitigate biases in AI systems, with a focus on fairness in machine learning models.
+                        </p>
+                        <div class="research-meta">
+                            <span>Keywords: AI Ethics, Fairness, Bias Detection</span>
+                        </div>
+                        <div class="research-links">
+                            <a href="#" target="_blank">Paper</a>
+                            <a href="#" target="_blank">Presentation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications">
+        <div class="container">
+            <h2 class="section-title">Publications</h2>
+            <div class="publications-list">
+                <!-- Publication 1 -->
+                <div class="publication-item">
+                    <h3 class="publication-title">Title of Your Research Paper Goes Here</h3>
+                    <p class="publication-authors"><strong>Your Name</strong>, Co-author One, Co-author Two</p>
+                    <p class="publication-venue">Journal or Conference Name, Year</p>
+                    <div class="publication-links">
+                        <a href="#" target="_blank">Paper</a>
+                        <a href="#" target="_blank">Code</a>
+                        <a href="#" target="_blank">DOI</a>
+                        <a href="#" target="_blank">BibTeX</a>
+                    </div>
+                </div>
+                
+                <!-- Publication 2 -->
+                <div class="publication-item">
+                    <h3 class="publication-title">Another Research Paper Title With Important Findings</h3>
+                    <p class="publication-authors">Co-author One, <strong>Your Name</strong>, Co-author Two, Co-author Three</p>
+                    <p class="publication-venue">Journal or Conference Name, Year</p>
+                    <div class="publication-links">
+                        <a href="#" target="_blank">Paper</a>
+                        <a href="#" target="_blank">Code</a>
+                        <a href="#" target="_blank">DOI</a>
+                        <a href="#" target="_blank">BibTeX</a>
+                    </div>
+                </div>
+                
+                <!-- Publication 3 -->
+                <div class="publication-item">
+                    <h3 class="publication-title">A Third Research Paper With Groundbreaking Results</h3>
+                    <p class="publication-authors"><strong>Your Name</strong>, Co-author One</p>
+                    <p class="publication-venue">Journal or Conference Name, Year</p>
+                    <div class="publication-links">
+                        <a href="#" target="_blank">Paper</a>
+                        <a href="#" target="_blank">Code</a>
+                        <a href="#" target="_blank">DOI</a>
+                        <a href="#" target="_blank">BibTeX</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <!-- Experience 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023 - Present</div>
+                        <h3 class="timeline-title">Research Assistant</h3>
+                        <p class="timeline-location">University Research Lab, City, Country</p>
+                        <p>Conducting research on [specific area], developing algorithms for [specific purpose], and collaborating with a team of researchers to [specific goal].</p>
+                    </div>
+                </div>
+                
+                <!-- Experience 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2021 - 2023</div>
+                        <h3 class="timeline-title">Research Intern</h3>
+                        <p class="timeline-location">Industry Research Lab, City, Country</p>
+                        <p>Developed and implemented novel algorithms for [specific problem], resulting in [specific achievement or outcome].</p>
+                    </div>
+                </div>
+                
+                <!-- Experience 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2019 - 2021</div>
+                        <h3 class="timeline-title">Graduate Teaching Assistant</h3>
+                        <p class="timeline-location">University Department, City, Country</p>
+                        <p>Assisted in teaching [specific courses], graded assignments and exams, and held regular office hours to support students.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-list">
+                <!-- Education 1 -->
+                <div class="education-item">
+                    <h3 class="degree">Ph.D. in Computer Science</h3>
+                    <p class="university">University Name</p>
+                    <p class="education-date">2020 - Present</p>
+                    <p>Thesis: "Your Thesis Title Goes Here"</p>
+                    <p>Advisor: Professor Advisor Name</p>
+                </div>
+                
+                <!-- Education 2 -->
+                <div class="education-item">
+                    <h3 class="degree">M.S. in Computer Science</h3>
+                    <p class="university">University Name</p>
+                    <p class="education-date">2018 - 2020</p>
+                    <p>Thesis: "Your Master's Thesis Title"</p>
+                    <p>Advisor: Professor Advisor Name</p>
+                </div>
+                
+                <!-- Education 3 -->
+                <div class="education-item">
+                    <h3 class="degree">B.S. in Computer Science</h3>
+                    <p class="university">University Name</p>
+                    <p class="education-date">2014 - 2018</p>
+                    <p>Graduated with Honors</p>
+                    <p>GPA: 3.9/4.0</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <div class="contact-method">
+                    <i class="fas fa-envelope"></i>
+                    <p class="contact-info">your.email@example.com</p>
+                </div>
+                <div class="contact-method">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p class="contact-info">Department of Computer Science<br>University Name<br>City, Country</p>
+                </div>
+                <div class="contact-method">
+                    <i class="fas fa-phone"></i>
+                    <p class="contact-info">Available upon request</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
     <footer>
-        <p>&copy; 2025 Your Name</p>
+        <div class="container">
+            <p class="copyright">© 2025 Your Name. All Rights Reserved.</p>
+            <p>Last updated: May 2025</p>
+        </div>
     </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Fixed navigation on scroll
+        const nav = document.querySelector('nav');
+        const navOffset = nav.offsetTop;
+        
+        function handleScroll() {
+            if (window.pageYOffset >= navOffset) {
+                nav.classList.add('sticky');
+            } else {
+                nav.classList.remove('sticky');
+            }
+        }
+        
+        window.addEventListener('scroll', handleScroll);
+    </script>
 </body>
 </html>
